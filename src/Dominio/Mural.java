@@ -8,6 +8,6 @@ package Dominio;
  *
  * @author KEVIN
  */
-public class mostrarMatriz {
+public class Mural {
     
 }
