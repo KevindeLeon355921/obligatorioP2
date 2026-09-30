@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package obligatoriop2;
+package obligatorio2;
 
 /**
  *
- * @author KEVIN
+ * @author franp
  */
-public class ObligatorioP2 {
+public class Obligatorio2 {
 
     /**
      * @param args the command line arguments
