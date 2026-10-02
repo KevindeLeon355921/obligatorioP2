@@ -4,13 +4,21 @@
  */
 package Dominio;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author KEVIN
  */
 public class Sistema {
-     private ArrayList <String> misDisenadores;
-     public disenadores(){
+     private ArrayList <String> listaDisenadores;
+     public  Sistema(){
          listaDisenadores=new ArrayList<String>();
+    }
+     public void setDisenador(String nombre) {
+        listaDisenadores.add(nombre);
+    }
+    public ArrayList getListaDisenadores(){
+        return this.listaDisenadores;
     }
 }
