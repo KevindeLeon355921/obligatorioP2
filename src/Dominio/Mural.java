@@ -1,13 +1,11 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Obligatorio 1 - Programacion 2 - Universidad ORT Uruguay
+ * Autores:
+ *   Francisco Puchala - Nro. de estudiante: XXXXXX
+ *   NOMBRE COMPLETO COMPANERO - Nro. de estudiante: XXXXXX
  */
-package Dominio;
+package dominio;
 
-/**
- *
- * @author KEVIN
- */
 public class Mural {
-    
+
 }
