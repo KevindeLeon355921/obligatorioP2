@@ -10,17 +10,19 @@ import java.util.ArrayList;
 
 public class Sistema {
 
-    private ArrayList<String> listaDisenadores;
+    private ArrayList<Disenador> listaDisenadores;
 
     public Sistema() {
-        listaDisenadores = new ArrayList<String>();
+        listaDisenadores = new ArrayList<Disenador>();
     }
-
-    public void setDisenador(String nombre) {
-        listaDisenadores.add(nombre);
-    }
-
-    public ArrayList getListaDisenadores() {
+    
+    public ArrayList<Disenador> getListaDisenadores() {
         return this.listaDisenadores;
     }
+
+    public void agregarDisenador(Disenador unDisenador){
+        this.getListaDisenadores().add(unDisenador);
+    }
+
+    
 }

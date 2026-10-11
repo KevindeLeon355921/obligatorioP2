@@ -10,4 +10,22 @@ public class Disenador {
     private String nombre;
     private String mail;
     private String direccion;
+    
+    public Disenador(String nombre, String mail, String direccion){
+        this.nombre = nombre;
+        this.mail = mail;
+        this.direccion = direccion;
+    }
+    
+    public String getNombre(){
+        return this.nombre;
+    }
+    
+    public String getMail(){
+        return this.mail;
+    }
+    
+    public String getDireccion(){
+        return this.direccion;
+    }
 }
