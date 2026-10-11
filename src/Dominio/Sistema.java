@@ -19,8 +19,8 @@ public class Sistema {
     public void agregarDisenador(Disenador disenador) {
         listaDisenadores.add(disenador);
     }
-
-    public ArrayList<Disenador> getListaDisenadores(){
+    
+    public ArrayList<Disenador> getListaDisenadores() {
         return this.listaDisenadores;
     }
 }

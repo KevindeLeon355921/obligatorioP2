@@ -15,13 +15,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Obligatorio2 {
-
     private static Scanner teclado = new Scanner(System.in);
-
+    
     public static void main(String[] args) throws UnsupportedEncodingException {
-        System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8.name()));
-        Sistema sistema = new Sistema();
-        menuPrincipal(sistema);
+           System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8.name()));
+           Sistema sistema = new Sistema();
+           
     }
 
     private static void menuPrincipal(Sistema sistema) {
