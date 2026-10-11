@@ -2,7 +2,7 @@
  * Obligatorio 1 - Programacion 2 - Universidad ORT Uruguay
  * Autores:
  *   Francisco Puchala - Nro. de estudiante: XXXXXX
- *   NOMBRE COMPLETO COMPANERO - Nro. de estudiante: XXXXXX
+ *   Kevin de León - Nro. de estudiante: 359921
  */
 package dominio;
 
@@ -10,17 +10,17 @@ import java.util.ArrayList;
 
 public class Sistema {
 
-    private ArrayList<String> listaDisenadores;
+    private ArrayList<Disenador> listaDisenadores;
 
     public Sistema() {
-        listaDisenadores = new ArrayList<String>();
+        listaDisenadores = new ArrayList<Disenador>();
     }
 
-    public void setDisenador(String nombre) {
-        listaDisenadores.add(nombre);
+    public void agregarDisenador(Disenador disenador) {
+        listaDisenadores.add(disenador);
     }
 
-    public ArrayList getListaDisenadores() {
+    public ArrayList<Disenador> getListaDisenadores(){
         return this.listaDisenadores;
     }
 }

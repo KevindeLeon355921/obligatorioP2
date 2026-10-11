@@ -2,14 +2,16 @@
  * Obligatorio 1 - Programacion 2 - Universidad ORT Uruguay
  * Autores:
  *   Francisco Puchala - Nro. de estudiante: XXXXXX
- *   NOMBRE COMPLETO COMPANERO - Nro. de estudiante: XXXXXX
+ *   Kevin de León - Nro. de estudiante: 359921
  */
 package interfaz;
 
+import dominio.Disenador;
 import dominio.Sistema;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Obligatorio2 {
@@ -33,6 +35,12 @@ public class Obligatorio2 {
                     break;
                 case 1:
                     mostrarAutores();
+                    break;
+                case 2:
+                    registrarDisenador(sistema);
+                    break;
+                case 7:
+                    mostrarListaDisenadores(sistema);
                     break;
                 default:
                     System.out.println("Opción todavía no implementada.");
@@ -59,7 +67,7 @@ public class Obligatorio2 {
     private static void mostrarAutores() {
         System.out.println("Autores del obligatorio:");
         System.out.println("- Francisco Puchala - Nro. de estudiante: XXXXXX");
-        System.out.println("- NOMBRE COMPLETO COMPANERO - Nro. de estudiante: XXXXXX");
+        System.out.println("- Kevin de León - Nro. de estudiante: 359921");
     }
 
     private static int leerEntero(String mensaje, int min, int max) {
@@ -80,5 +88,32 @@ public class Obligatorio2 {
             }
         }
         return numero;
+    }
+    
+    private static void registrarDisenador(Sistema sistema){
+        System.out.println("Ingrese el nombre del diseñador:");
+        String nombre=teclado.nextLine();
+        System.out.println("Ingrese el mail del diseñador");
+        String mail=teclado.nextLine();
+        System.out.println("Ingrese la dirección del diseñador");
+        String direccion=teclado.nextLine();
+        Disenador disenador= new Disenador();
+        disenador.setNombre(nombre);
+        disenador.setMail(mail);
+        disenador.setDireccion(direccion);
+        sistema.agregarDisenador(disenador);
+        System.out.println("Se registró correctamente el diseñador");
+    }
+    
+    private static void mostrarListaDisenadores(Sistema sistema){
+        ArrayList<Disenador> lista=sistema.getListaDisenadores();
+        if(lista.size()>=1){
+            for(int i=0; i<lista.size(); i++){
+                System.out.println(lista.get(i));
+                System.out.println("");
+            }
+        }else{
+            System.out.println("No se ingresaron diseñadores, ingrese alguno para poder verlo en el listado");
+        }
     }
 }
