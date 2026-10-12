@@ -12,11 +12,13 @@ public class Ficha {
     private String nombreFicha;
     private String diseñoChico;
     private String diseñoGrande;
+    private String color;
     
     public Ficha(){
         this.setNombreFicha("sin nombre");
         this.setDiseñoChico("sin diseño chico");
         this.setDiseñoGrande("sin diseño grande");
+        this.setColor("sin color");
     }
     public void setNombreFicha(String unNombreFicha){
         this.nombreFicha=unNombreFicha;
@@ -35,6 +37,12 @@ public class Ficha {
     }
     public String getDiseñoGrande(){
         return this.diseñoGrande;
+    }
+    public void setColor(String unColor){
+        this.color=unColor;
+    }
+    public String getColor(){
+        return this.color;
     }
     public boolean tieneEspacios(String string){
         boolean tiene=false;

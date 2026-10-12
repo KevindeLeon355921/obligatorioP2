@@ -127,14 +127,14 @@ public class Obligatorio2 {
 
     private static void registrarFicha(Sistema sistema) {
         Ficha ficha = new Ficha();
-        System.out.println("Ingrese el nombre de la ficha");
+        System.out.println("Ingrese el nombre de la ficha:");
         String nombre = teclado.nextLine(),toUpperCase;
         while(ficha.seRepiteNombreFicha(nombre, sistema)){
-            System.out.println("ese nombre ya existe, ingrese otro por favor");
+            System.out.println("ese nombre ya existe, ingrese otro por favor:");
             nombre = teclado.nextLine();
         }
         ficha.setNombreFicha(nombre);
-        System.out.println("Ingrese el diseño chico de la ficha, los puntos serán interpretados como espacios");
+        System.out.println("Ingrese el diseño chico de la ficha, los puntos serán interpretados como espacios:");
         String diseñoChico = teclado.nextLine();
         while (diseñoChico.length() != 9 || ficha.tieneEspacios(diseñoChico)) {
             if (diseñoChico.length() != 9) {
@@ -142,7 +142,7 @@ public class Obligatorio2 {
             } else if (ficha.tieneEspacios(diseñoChico)) {
                 System.out.println("el diseño no puede contener espacios");
             }
-            System.out.println("Ingrese el diseño chico de la ficha, los puntos serán interpretados como espacios");
+            System.out.println("Ingrese el diseño chico de la ficha, los puntos serán interpretados como espacios:");
             diseñoChico = teclado.nextLine();
         }
         ficha.setDiseñoChico(diseñoChico);
@@ -154,10 +154,19 @@ public class Obligatorio2 {
             } else if (ficha.tieneEspacios(diseñoGrande)) {
                 System.out.println("el diseño no puede contener espacios");
             }
-            System.out.println("Ingrese el diseño grande de la ficha, los puntos serán interpretados como espacios");
+            System.out.println("Ingrese el diseño grande de la ficha, los puntos serán interpretados como espacios:");
             diseñoGrande = teclado.nextLine();
         }
         ficha.setDiseñoGrande(diseñoGrande);
+        System.out.println("Ingrese el color de la ficha(R,A,B,N,M,V,G,C):");
+        String color=teclado.nextLine();
+        String coloresValidos="RABNMVGC";
+        while(!coloresValidos.contains(color.toUpperCase())){
+            System.out.println("debe ingresar un color válido");
+            System.out.println("Ingrese el color de la ficha(R,A,B,N,M,V,G,C):");
+            color=teclado.nextLine();
+        }
+        ficha.setColor(color);
         sistema.agregarFicha(ficha);
         System.out.println("se registró correctamente la ficha");
     }
