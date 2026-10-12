@@ -16,6 +16,7 @@ public class Ficha {
     public Ficha(){
         this.setNombreFicha("sin nombre");
         this.setDiseñoChico("sin diseño chico");
+        this.setDiseñoGrande("sin diseño grande");
     }
     public void setNombreFicha(String unNombreFicha){
         this.nombreFicha=unNombreFicha;
@@ -45,7 +46,7 @@ public class Ficha {
         }
         return tiene;
     }
-    public boolean seRepiteNombre(String nombre, Sistema sistema){
+    public boolean seRepiteNombreFicha(String nombre, Sistema sistema){
         boolean repetido=false;
         ArrayList<Ficha> lista= sistema.getListaFichas();
         for(int i=0;i<lista.size() && !repetido;i++){

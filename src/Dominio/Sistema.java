@@ -10,20 +10,20 @@ import java.util.ArrayList;
 
 public class Sistema {
 
-    private ArrayList<Disenador> listaDisenadores;
+    private ArrayList<Diseñador> listaDiseñadores;
     private ArrayList<Ficha> listaFichas;
 
     public Sistema() {
-        listaDisenadores = new ArrayList<Disenador>();
+        listaDiseñadores = new ArrayList<Diseñador>();
         listaFichas= new ArrayList<Ficha>();
     }
 
-    public void agregarDisenador(Disenador disenador) {
-        listaDisenadores.add(disenador);
+    public void agregarDisenador(Diseñador disenador) {
+        listaDiseñadores.add(disenador);
     }
     
-    public ArrayList<Disenador> getListaDisenadores() {
-        return this.listaDisenadores;
+    public ArrayList<Diseñador> getListaDisenadores() {
+        return this.listaDiseñadores;
     }
     
     public void agregarFicha(Ficha ficha){

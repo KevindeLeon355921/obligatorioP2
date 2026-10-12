@@ -6,20 +6,22 @@
  */
 package dominio;
 
-public class Disenador {
+import java.util.ArrayList;
+
+public class Diseñador {
     private String nombre;
     private String mail;
     private String direccion;
     
-    public Disenador(){
-        this.setNombre("Sin nombre");
+    public Diseñador(){
+        this.setNombreDiseñador("Sin nombre");
         this.setMail("Sin Mail");
         this.setDireccion("Sin dirección");
     }
-    public void setNombre(String unNombre){
+    public void setNombreDiseñador(String unNombre){
         this.nombre=unNombre;
     }
-    public String getNombre(){
+    public String getNombreDiseñador(){
         return this.nombre;
     }
     public void setMail(String unMail){
@@ -33,6 +35,18 @@ public class Disenador {
     }
     public String getDireccion(){
         return this.direccion;
+    }
+    public boolean seRepiteNombreDiseñador(String nombre, Sistema sistema){
+        boolean repetido=false;
+        ArrayList<Diseñador> lista= sistema.getListaDisenadores();
+        for(int i=0;i<lista.size() && !repetido;i++){
+            Diseñador disenador=lista.get(i);
+            String nom= disenador.getNombreDiseñador();
+            if(nombre.equals(nom)){
+                repetido=true;
+            }
+        }
+        return repetido; 
     }
     
     @Override

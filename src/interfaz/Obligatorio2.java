@@ -6,7 +6,7 @@
  */
 package interfaz;
 
-import dominio.Disenador;
+import dominio.Diseñador;
 import dominio.Sistema;
 import dominio.Ficha;
 import java.io.PrintStream;
@@ -101,8 +101,8 @@ public class Obligatorio2 {
         String mail = teclado.nextLine();
         System.out.println("Ingrese la dirección del diseñador");
         String direccion = teclado.nextLine();
-        Disenador disenador = new Disenador();
-        disenador.setNombre(nombre);
+        Diseñador disenador = new Diseñador();
+        disenador.setNombreDiseñador(nombre);
         disenador.setMail(mail);
         disenador.setDireccion(direccion);
         sistema.agregarDisenador(disenador);
@@ -110,7 +110,7 @@ public class Obligatorio2 {
     }
 
     private static void mostrarListaDisenadores(Sistema sistema) {
-        ArrayList<Disenador> lista = sistema.getListaDisenadores();
+        ArrayList<Diseñador> lista = sistema.getListaDisenadores();
         if (lista.size() >= 1) {
             for (int i = 0; i < lista.size(); i++) {
                 System.out.println(lista.get(i));
@@ -125,7 +125,7 @@ public class Obligatorio2 {
         Ficha ficha = new Ficha();
         System.out.println("Ingrese el nombre de la ficha");
         String nombre = teclado.nextLine(),toUpperCase;
-        while(ficha.seRepiteNombre(nombre, sistema)){
+        while(ficha.seRepiteNombreFicha(nombre, sistema)){
             System.out.println("ese nombre ya existe, ingrese otro por favor");
             nombre = teclado.nextLine();
         }
