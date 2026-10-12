@@ -8,6 +8,7 @@ package interfaz;
 
 import dominio.Disenador;
 import dominio.Sistema;
+import dominio.Ficha;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
@@ -15,12 +16,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Obligatorio2 {
+
     private static Scanner teclado = new Scanner(System.in);
-    
+
     public static void main(String[] args) throws UnsupportedEncodingException {
         System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8.name()));
         Sistema sistema = new Sistema();
-        menuPrincipal(sistema);   
+        menuPrincipal(sistema);
     }
 
     private static void menuPrincipal(Sistema sistema) {
@@ -37,6 +39,9 @@ public class Obligatorio2 {
                     break;
                 case 2:
                     registrarDisenador(sistema);
+                    break;
+                case 3:
+                    registrarFicha(sistema);
                     break;
                 case 7:
                     mostrarListaDisenadores(sistema);
@@ -88,31 +93,56 @@ public class Obligatorio2 {
         }
         return numero;
     }
-    
-    private static void registrarDisenador(Sistema sistema){
+
+    private static void registrarDisenador(Sistema sistema) {
         System.out.println("Ingrese el nombre del diseñador:");
-        String nombre=teclado.nextLine();
+        String nombre = teclado.nextLine();
         System.out.println("Ingrese el mail del diseñador");
-        String mail=teclado.nextLine();
+        String mail = teclado.nextLine();
         System.out.println("Ingrese la dirección del diseñador");
-        String direccion=teclado.nextLine();
-        Disenador disenador= new Disenador();
+        String direccion = teclado.nextLine();
+        Disenador disenador = new Disenador();
         disenador.setNombre(nombre);
         disenador.setMail(mail);
         disenador.setDireccion(direccion);
         sistema.agregarDisenador(disenador);
         System.out.println("Se registró correctamente el diseñador");
     }
-    
-    private static void mostrarListaDisenadores(Sistema sistema){
-        ArrayList<Disenador> lista=sistema.getListaDisenadores();
-        if(lista.size()>=1){
-            for(int i=0; i<lista.size(); i++){
+
+    private static void mostrarListaDisenadores(Sistema sistema) {
+        ArrayList<Disenador> lista = sistema.getListaDisenadores();
+        if (lista.size() >= 1) {
+            for (int i = 0; i < lista.size(); i++) {
                 System.out.println(lista.get(i));
                 System.out.println("");
             }
-        }else{
+        } else {
             System.out.println("No se ingresaron diseñadores, ingrese alguno para poder verlo en el listado");
         }
     }
+
+    private static void registrarFicha(Sistema sistema) {
+        Ficha ficha = new Ficha();
+        System.out.println("Ingrese el nombre de la ficha");
+        String nombre = teclado.nextLine(),toUpperCase;
+        while(ficha.seRepiteNombre(nombre, sistema)){
+            System.out.println("ese nombre ya existe, ingrese otro por favor");
+            nombre = teclado.nextLine();
+        }
+        ficha.setNombreFicha(nombre);
+        System.out.println("Ingrese el diseño chico de la ficha, los puntos serán interpretados como espacios");
+        String diseñoChico = teclado.nextLine();
+        while (diseñoChico.length() != 9 || ficha.tieneEspacios(diseñoChico)) {
+            if (diseñoChico.length() != 9) {
+                System.out.println("el tamaño chico de la ficha debe ser de 9");
+            } else if (ficha.tieneEspacios(diseñoChico)) {
+                System.out.println("el diseño no puede contener espacios");
+            }
+            System.out.println("Ingrese el diseño chico de la ficha, los puntos serán interpretados como espacios");
+            diseñoChico = teclado.nextLine();
+        }
+        ficha.setDiseñoChico(diseñoChico);
+        sistema.agregarFicha(ficha);
+    }
+    
 }

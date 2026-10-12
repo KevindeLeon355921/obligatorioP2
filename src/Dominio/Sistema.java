@@ -11,9 +11,11 @@ import java.util.ArrayList;
 public class Sistema {
 
     private ArrayList<Disenador> listaDisenadores;
+    private ArrayList<Ficha> listaFichas;
 
     public Sistema() {
         listaDisenadores = new ArrayList<Disenador>();
+        listaFichas= new ArrayList<Ficha>();
     }
 
     public void agregarDisenador(Disenador disenador) {
@@ -22,5 +24,13 @@ public class Sistema {
     
     public ArrayList<Disenador> getListaDisenadores() {
         return this.listaDisenadores;
+    }
+    
+    public void agregarFicha(Ficha ficha){
+        listaFichas.add(ficha);
+    }
+    
+    public ArrayList<Ficha> getListaFichas(){
+        return this.listaFichas;
     }
 }
