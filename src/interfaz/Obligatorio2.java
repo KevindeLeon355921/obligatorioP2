@@ -95,22 +95,26 @@ public class Obligatorio2 {
     }
 
     private static void registrarDisenador(Sistema sistema) {
+        Diseñador diseñador = new Diseñador();
         System.out.println("Ingrese el nombre del diseñador:");
         String nombre = teclado.nextLine();
+        while(diseñador.seRepiteNombreDiseñador(nombre, sistema)){
+            System.out.println("ya se ingresó un diseñador con ese nombre, ingrese uno distinto");
+            nombre=teclado.nextLine();
+        }
         System.out.println("Ingrese el mail del diseñador");
         String mail = teclado.nextLine();
         System.out.println("Ingrese la dirección del diseñador");
         String direccion = teclado.nextLine();
-        Diseñador disenador = new Diseñador();
-        disenador.setNombreDiseñador(nombre);
-        disenador.setMail(mail);
-        disenador.setDireccion(direccion);
-        sistema.agregarDisenador(disenador);
+        diseñador.setNombreDiseñador(nombre);
+        diseñador.setMail(mail);
+        diseñador.setDireccion(direccion);
+        sistema.agregarDiseñador(diseñador);
         System.out.println("Se registró correctamente el diseñador");
     }
 
     private static void mostrarListaDisenadores(Sistema sistema) {
-        ArrayList<Diseñador> lista = sistema.getListaDisenadores();
+        ArrayList<Diseñador> lista = sistema.getListaDiseñadores();
         if (lista.size() >= 1) {
             for (int i = 0; i < lista.size(); i++) {
                 System.out.println(lista.get(i));
@@ -142,7 +146,19 @@ public class Obligatorio2 {
             diseñoChico = teclado.nextLine();
         }
         ficha.setDiseñoChico(diseñoChico);
+        System.out.println("Ingrese el diseño grande de la ficha, los puntos serán interpretados como espacios");
+        String diseñoGrande = teclado.nextLine();
+        while (diseñoGrande.length() != 25 || ficha.tieneEspacios(diseñoGrande)) {
+            if (diseñoGrande.length() != 25) {
+                System.out.println("el tamaño grande de la ficha debe ser de 25");
+            } else if (ficha.tieneEspacios(diseñoGrande)) {
+                System.out.println("el diseño no puede contener espacios");
+            }
+            System.out.println("Ingrese el diseño grande de la ficha, los puntos serán interpretados como espacios");
+            diseñoGrande = teclado.nextLine();
+        }
+        ficha.setDiseñoGrande(diseñoGrande);
         sistema.agregarFicha(ficha);
+        System.out.println("se registró correctamente la ficha");
     }
-    
 }

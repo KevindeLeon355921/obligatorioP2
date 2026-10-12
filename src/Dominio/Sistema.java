@@ -18,11 +18,11 @@ public class Sistema {
         listaFichas= new ArrayList<Ficha>();
     }
 
-    public void agregarDisenador(Diseñador disenador) {
+    public void agregarDiseñador(Diseñador disenador) {
         listaDiseñadores.add(disenador);
     }
     
-    public ArrayList<Diseñador> getListaDisenadores() {
+    public ArrayList<Diseñador> getListaDiseñadores() {
         return this.listaDiseñadores;
     }
     

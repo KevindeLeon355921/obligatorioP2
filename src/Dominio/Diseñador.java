@@ -38,10 +38,10 @@ public class Diseñador {
     }
     public boolean seRepiteNombreDiseñador(String nombre, Sistema sistema){
         boolean repetido=false;
-        ArrayList<Diseñador> lista= sistema.getListaDisenadores();
+        ArrayList<Diseñador> lista= sistema.getListaDiseñadores();
         for(int i=0;i<lista.size() && !repetido;i++){
-            Diseñador disenador=lista.get(i);
-            String nom= disenador.getNombreDiseñador();
+            Diseñador diseñador=lista.get(i);
+            String nom= diseñador.getNombreDiseñador();
             if(nombre.equals(nom)){
                 repetido=true;
             }
