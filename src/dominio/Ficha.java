@@ -7,5 +7,6 @@
 package dominio;
 
 public class Ficha {
-
+    private String nombreFicha;
+    private String tipoFicha;
 }
