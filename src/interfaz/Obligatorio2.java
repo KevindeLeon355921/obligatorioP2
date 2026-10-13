@@ -169,5 +169,7 @@ public class Obligatorio2 {
         ficha.setColor(color);
         sistema.agregarFicha(ficha);
         System.out.println("se registró correctamente la ficha");
+        ficha.mostrarFichaGrande();
+        ficha.mostrarFichaChica();
     }
 }

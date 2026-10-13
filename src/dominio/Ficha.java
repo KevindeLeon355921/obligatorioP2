@@ -66,6 +66,38 @@ public class Ficha {
         }
         return repetido; 
     }
+    public void mostrarFichaGrande(){
+        char[][] fichaGrande= new char[5][5];
+        int contador=0;
+        for(int i=0; i<fichaGrande.length;i++){
+            for(int j=0;j<fichaGrande[0].length;j++){
+                fichaGrande[i][j]=this.diseñoGrande.charAt(contador);
+                contador++;
+            }
+        }
+        for(int i=0; i<fichaGrande.length;i++){
+            for(int j=0; j<fichaGrande[0].length;j++){
+                System.out.print(fichaGrande[i][j]);
+            }
+            System.out.println("");
+        }
+    }
+    public void mostrarFichaChica(){
+        char[][] fichaChica= new char[3][3];
+        int contador=0;
+        for(int i=0; i<fichaChica.length;i++){
+            for(int j=0;j<fichaChica[0].length;j++){
+                fichaChica[i][j]=this.diseñoChico.charAt(contador);
+                contador++;
+            }
+        }
+        for(int i=0;i<fichaChica.length;i++){
+            for(int j=0;j<fichaChica[0].length;j++){
+                System.out.print(fichaChica[i][j]);
+            }
+            System.out.println("");
+        }
+    }
     
     @Override
     public String toString(){
