@@ -66,37 +66,20 @@ public class Ficha {
         }
         return repetido; 
     }
-    public void mostrarFichaGrande(){
-        char[][] fichaGrande= new char[5][5];
-        int contador=0;
-        for(int i=0; i<fichaGrande.length;i++){
-            for(int j=0;j<fichaGrande[0].length;j++){
-                fichaGrande[i][j]=this.diseñoGrande.charAt(contador);
-                contador++;
-            }
-        }
-        for(int i=0; i<fichaGrande.length;i++){
-            for(int j=0; j<fichaGrande[0].length;j++){
-                System.out.print(fichaGrande[i][j]);
-            }
-            System.out.println("");
-        }
+    
+    public String getFilaChica(int fila){
+        int inicio = fila * 3;
+        int fin = inicio + 3;
+        String pedazo = this.diseñoChico.substring(inicio, fin);
+        return pedazo.replace("."," ");
     }
-    public void mostrarFichaChica(){
-        char[][] fichaChica= new char[3][3];
-        int contador=0;
-        for(int i=0; i<fichaChica.length;i++){
-            for(int j=0;j<fichaChica[0].length;j++){
-                fichaChica[i][j]=this.diseñoChico.charAt(contador);
-                contador++;
-            }
-        }
-        for(int i=0;i<fichaChica.length;i++){
-            for(int j=0;j<fichaChica[0].length;j++){
-                System.out.print(fichaChica[i][j]);
-            }
-            System.out.println("");
-        }
+    
+    public String getFilaGrande(int fila){
+        int inicio = fila * 5;
+        int fin = inicio + 5;
+        String pedazo = this.diseñoGrande.substring(inicio, fin);
+        return pedazo.replace("."," ");
+                
     }
     
     @Override

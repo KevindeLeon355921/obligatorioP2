@@ -46,6 +46,8 @@ public class Obligatorio2 {
                 case 7:
                     mostrarListaDisenadores(sistema);
                     break;
+                case 9:
+                    mostrarTodasLasFichas(sistema);
                 default:
                     System.out.println("Opción todavía no implementada.");
                     break;
@@ -124,6 +126,69 @@ public class Obligatorio2 {
             System.out.println("No se ingresaron diseñadores, ingrese alguno para poder verlo en el listado");
         }
     }
+    
+    private static String codigoColor(String letra){
+        String codigo = "";
+        switch(letra){
+            case "N":
+                codigo = "\u001B[30m";
+                break;
+            case "R":
+                codigo = "\u001B[31m";
+                break;
+            case "V":
+                codigo = "\u001B[32m";
+                break;
+            case "M":
+                codigo = "\u001B[33m";
+                break;
+            case "A":
+                codigo = "\u001B[34m";
+                break;
+            case "G":
+                codigo = "\u001B[35m";
+                break;
+            case "C":
+                codigo = "\u001B[36m";
+                break;
+            case "B":
+                codigo = "\u001B[37m";
+                break;
+        }
+        return codigo;
+    }
+
+    private static String colorNormal(){
+        return "\u001B[0m";
+    }
+    
+    private static void mostrarFichaChica(Ficha ficha){
+        for(int i = 0;i<3;i++){
+            System.out.println(codigoColor(ficha.getColor()) + ficha.getFilaChica(i) + colorNormal() );
+            
+        }
+    }
+    
+    private static void mostrarFichaGrande(Ficha ficha){
+        for(int i= 0;i<5;i++){
+            System.out.println(codigoColor(ficha.getColor()) + ficha.getFilaGrande(i) + colorNormal() );
+
+        }
+    }
+    
+    private static void mostrarTodasLasFichas(Sistema sistema){
+    ArrayList<Ficha> fichas = sistema.getListaFichas();
+    for(int i=0; i< fichas.size(); i++){
+        Ficha ficha = fichas.get(i);
+        System.out.println("Ficha: " + ficha.getNombreFicha());
+        System.out.println("Color: " + ficha.getColor());
+        System.out.println("Tamaño chico:");
+        mostrarFichaChica(ficha);
+        System.out.println("Tamaño grande:");
+        mostrarFichaGrande(ficha);
+        System.out.println();
+    }
+}
 
     private static void registrarFicha(Sistema sistema) {
         Ficha ficha = new Ficha();
@@ -169,7 +234,7 @@ public class Obligatorio2 {
         ficha.setColor(color);
         sistema.agregarFicha(ficha);
         System.out.println("se registró correctamente la ficha");
-        ficha.mostrarFichaGrande();
-        ficha.mostrarFichaChica();
+        mostrarFichaGrande(ficha);
+        mostrarFichaChica(ficha);
     }
 }
