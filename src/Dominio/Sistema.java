@@ -12,10 +12,12 @@ public class Sistema {
 
     private ArrayList<Diseñador> listaDiseñadores;
     private ArrayList<Ficha> listaFichas;
+    private ArrayList<Mural> listaMurales;
 
     public Sistema() {  
         listaDiseñadores = new ArrayList<Diseñador>();
         listaFichas= new ArrayList<Ficha>();
+        listaMurales = new ArrayList<Mural>();
         precargarFicha();
     }
     private void crearFichaPrecargada(String nombre, String color, String chico, String grande){
@@ -51,5 +53,13 @@ public class Sistema {
     
     public ArrayList<Ficha> getListaFichas(){
         return this.listaFichas;
+    }
+    
+    public void agregarMural(Mural mural) {               // NUEVO
+        listaMurales.add(mural);
+    }
+
+    public ArrayList<Mural> getListaMurales() {           // NUEVO
+        return this.listaMurales;
     }
 }

@@ -48,6 +48,7 @@ public class Obligatorio2 {
                     break;
                 case 9:
                     mostrarTodasLasFichas(sistema);
+                    break;
                 default:
                     System.out.println("Opción todavía no implementada.");
                     break;

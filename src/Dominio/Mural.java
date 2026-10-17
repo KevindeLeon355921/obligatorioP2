@@ -60,7 +60,7 @@ public class Mural {
         this.mural[fila][columna] = ficha;
     }
     
-    public void aplicarFormato(){
+    public void aplicarFormato(Ficha vacia){
         switch (this.formato) {
             case "D":
                 boolean posFicha1 = true;
@@ -102,10 +102,25 @@ public class Mural {
                 }
                 break;
             case "R":
-                // random
+                for (int i = 0; i < this.mural.length; i++) {
+                    for (int j = 0; j < this.mural[0].length; j++) {
+                        int sorteo = (int) (Math.random() * 3);
+                        if (sorteo == 0) {
+                            setFichaEn(i, j, vacia);
+                        } else if (sorteo == 1) {
+                            setFichaEn(i, j, ficha1);
+                        } else {
+                            setFichaEn(i, j, ficha2);
+                        }
+                    }
+                }
                 break;
             case "M":
-                // todo vacío (las fichas las pone el usuario después)
+                for(int i =0; i<this.mural.length;i++){
+                    for(int j = 0; j<this.mural[0].length;j++){
+                        setFichaEn(i,j,vacia);
+                    }
+                }
                 break;
         }
     }
