@@ -55,11 +55,33 @@ public class Sistema {
         return this.listaFichas;
     }
     
-    public void agregarMural(Mural mural) {               // NUEVO
+    public void agregarMural(Mural mural) {               
         listaMurales.add(mural);
     }
 
-    public ArrayList<Mural> getListaMurales() {           // NUEVO
+    public ArrayList<Mural> getListaMurales() {           
         return this.listaMurales;
+    }
+    public boolean existeMural(String nombre){
+        boolean existe = false;
+        for(int i = 0; i < listaMurales.size(); i++){
+            Mural mural = listaMurales.get(i);
+            if(mural.getNombreMural().equals(nombre)){
+                existe = true;
+            }
+        }
+        return existe;
+    }
+    
+    public Ficha buscarFicha(String nombre){
+        Ficha encontrada = null;
+        for(int i = 0; i < listaFichas.size(); i++){
+            Ficha ficha = listaFichas.get(i);
+            if(ficha.getNombreFicha().equals(nombre)){
+                encontrada = ficha;
+            }
+        }
+        return encontrada;  
+                
     }
 }

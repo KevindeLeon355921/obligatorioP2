@@ -43,6 +43,9 @@ public class Obligatorio2 {
                 case 3:
                     registrarFicha(sistema);
                     break;
+                case 4:
+                    crearMural(sistema);
+                    break;
                 case 7:
                     mostrarListaDisenadores(sistema);
                     break;
@@ -179,17 +182,25 @@ public class Obligatorio2 {
     
     private static void mostrarTodasLasFichas(Sistema sistema){
     ArrayList<Ficha> fichas = sistema.getListaFichas();
-    for(int i=0; i< fichas.size(); i++){
-        Ficha ficha = fichas.get(i);
-        System.out.println("Ficha: " + ficha.getNombreFicha());
-        System.out.println("Color: " + ficha.getColor());
-        System.out.println("Tamaño chico:");
-        mostrarFichaChica(ficha);
-        System.out.println("Tamaño grande:");
-        mostrarFichaGrande(ficha);
-        System.out.println();
+        for(int i=0; i< fichas.size(); i++){
+            Ficha ficha = fichas.get(i);
+            System.out.println("Ficha: " + ficha.getNombreFicha());
+            System.out.println("Color: " + ficha.getColor());
+            System.out.println("Tamaño chico:");
+            mostrarFichaChica(ficha);
+            System.out.println("Tamaño grande:");
+            mostrarFichaGrande(ficha);
+            System.out.println();
+        }
     }
-}
+    
+    private static void crearMural(Sistema sistema){
+        for(int i = 0; i< sistema.getListaDiseñadores().size(); i++){
+            String nombre = sistema.getListaDiseñadores().get(i).getNombreDiseñador();
+            System.out.println((i+1) + ")" + nombre);
+        }
+    }
+
 
     private static void registrarFicha(Sistema sistema) {
         Ficha ficha = new Ficha();
