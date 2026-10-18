@@ -1,7 +1,7 @@
 /*
  * Obligatorio 1 - Programacion 2 - Universidad ORT Uruguay
  * Autores:
- *   Francisco Puchala - Nro. de estudiante: XXXXXX
+ *   Francisco Puchala - Nro. de estudiante: 350197
  *   Kevin de León - Nro. de estudiante: 359921
  */
 package dominio;
@@ -171,5 +171,33 @@ public class Mural {
             }
         }
         return distintas;
+    }
+
+    public int[] buscarArea(Mural origen, int filaOrigen, int colOrigen, int alto, int ancho) {
+        int[] encontrada = null;
+        for (int i = 0; i <= this.mural.length - alto && encontrada == null; i++) {
+            for (int j = 0; j <= this.mural[0].length - ancho && encontrada == null; j++) {
+                if (areaIgual(origen, filaOrigen, colOrigen, i, j, alto, ancho)) {
+                    encontrada = new int[2];
+                    encontrada[0] = i;
+                    encontrada[1] = j;
+                }
+            }
+        }
+        return encontrada;
+    }
+
+    private boolean areaIgual(Mural origen, int filaOrigen, int colOrigen, int filaAca, int colAca, int alto, int ancho) {
+        boolean igual = true;
+        for (int f = 0; f < alto && igual; f++) {
+            for (int c = 0; c < ancho && igual; c++) {
+                Ficha deOrigen = origen.getFichaEn(filaOrigen + f, colOrigen + c);
+                Ficha deAca = this.mural[filaAca + f][colAca + c];
+                if (!deOrigen.getNombreFicha().equals(deAca.getNombreFicha())) {
+                    igual = false;
+                }
+            }
+        }
+        return igual;
     }
 }

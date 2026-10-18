@@ -1,7 +1,7 @@
 /*
  * Obligatorio 1 - Programacion 2 - Universidad ORT Uruguay
  * Autores:
- *   Francisco Puchala - Nro. de estudiante: XXXXXX
+ *   Francisco Puchala - Nro. de estudiante: 350197
  *   Kevin de León - Nro. de estudiante: 359921
  */
 package interfaz;
@@ -56,11 +56,11 @@ public class Obligatorio2 {
                 case 7:
                     mostrarListaDisenadores(sistema);
                     break;
+                case 8:
+                    compararMurales(sistema);
+                    break;
                 case 9:
                     mostrarTodasLasFichas(sistema);
-                    break;
-                default:
-                    System.out.println("Opción todavía no implementada.");
                     break;
             }
         }
@@ -83,7 +83,7 @@ public class Obligatorio2 {
 
     private static void mostrarAutores() {
         System.out.println("Autores del obligatorio:");
-        System.out.println("- Francisco Puchala - Nro. de estudiante: XXXXXX");
+        System.out.println("- Francisco Puchala - Nro. de estudiante: 350197");
         System.out.println("- Kevin de León - Nro. de estudiante: 359921");
     }
 
@@ -111,8 +111,8 @@ public class Obligatorio2 {
         Diseñador diseñador = new Diseñador();
         System.out.println("Ingrese el nombre del diseñador:");
         String nombre = teclado.nextLine();
-        while(diseñador.seRepiteNombreDiseñador(nombre, sistema)){
-            System.out.println("ya se ingresó un diseñador con ese nombre, ingrese uno distinto");
+        while(nombre.trim().equals("") || diseñador.seRepiteNombreDiseñador(nombre, sistema)){
+            System.out.println("el nombre no puede estar vacío ni repetirse, ingrese uno distinto");
             nombre=teclado.nextLine();
         }
         System.out.println("Ingrese el mail del diseñador");
@@ -192,7 +192,7 @@ public class Obligatorio2 {
     }
     
     private static void mostrarTodasLasFichas(Sistema sistema){
-    ArrayList<Ficha> fichas = sistema.getListaFichas();
+        ArrayList<Ficha> fichas = sistema.getListaFichas();
         for(int i=0; i< fichas.size(); i++){
             Ficha ficha = fichas.get(i);
             System.out.println("Ficha: " + ficha.getNombreFicha());
@@ -408,12 +408,48 @@ public class Obligatorio2 {
         }
     }
 
+    private static void compararMurales(Sistema sistema) {
+        ArrayList<Mural> murales = sistema.getListaMurales();
+        if (murales.size() < 2) {
+            System.out.println("Se necesitan al menos 2 murales para comparar.");
+            return;
+        }
+        for (int i = 0; i < murales.size(); i++) {
+            Mural m = murales.get(i);
+            System.out.println((i + 1) + ") " + m.getNombreMural() + " - " + m.getDiseñador().getNombreDiseñador());
+        }
+        int num = leerEntero("Elija el mural original: ", 1, murales.size());
+        Mural original = murales.get(num - 1);
+
+        int fila = leerEntero("Fila inicial (1-10): ", 1, 10);
+        int columna = leerEntero("Columna inicial (1-12): ", 1, 12);
+        int maxFilas = 10 - fila + 1;
+        int maxColumnas = 12 - columna + 1;
+        int alto = leerEntero("Cantidad de filas (1-" + maxFilas + "): ", 1, maxFilas);
+        int ancho = leerEntero("Cantidad de columnas (1-" + maxColumnas + "): ", 1, maxColumnas);
+
+        boolean hayAlguno = false;
+        for (int i = 0; i < murales.size(); i++) {
+            Mural otro = murales.get(i);
+            if (!otro.getNombreMural().equals(original.getNombreMural())) {
+                int[] posicion = otro.buscarArea(original, fila - 1, columna - 1, alto, ancho);
+                if (posicion != null) {
+                    System.out.println("Mural " + otro.getNombreMural() + ": fila " + (posicion[0] + 1) + ", columna " + (posicion[1] + 1));
+                    hayAlguno = true;
+                }
+            }
+        }
+        if (!hayAlguno) {
+            System.out.println("Ningún otro mural tiene un área idéntica.");
+        }
+    }
+
     private static void registrarFicha(Sistema sistema) {
         Ficha ficha = new Ficha();
         System.out.println("Ingrese el nombre de la ficha:");
         String nombre = teclado.nextLine().toUpperCase();
-        while(ficha.seRepiteNombreFicha(nombre, sistema)){
-            System.out.println("ese nombre ya existe, ingrese otro por favor:");
+        while(nombre.trim().equals("") || ficha.seRepiteNombreFicha(nombre, sistema)){
+            System.out.println("el nombre no puede estar vacío ni repetirse, ingrese otro por favor:");
             nombre = teclado.nextLine().toUpperCase();
         }
         ficha.setNombreFicha(nombre);
