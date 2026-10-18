@@ -127,14 +127,18 @@ public class Obligatorio2 {
     }
 
     private static void mostrarListaDisenadores(Sistema sistema) {
-        ArrayList<Diseñador> lista = sistema.getListaDiseñadores();
-        if (lista.size() >= 1) {
-            for (int i = 0; i < lista.size(); i++) {
-                System.out.println(lista.get(i));
-                System.out.println("");
-            }
-        } else {
+        ArrayList<Diseñador> lista = sistema.getDiseñadoresOrdenados();
+        if (lista.size() == 0) {
             System.out.println("No se ingresaron diseñadores, ingrese alguno para poder verlo en el listado");
+            return;
+        }
+        for (int i = 0; i < lista.size(); i++) {
+            Diseñador d = lista.get(i);
+            System.out.println(d);
+            System.out.println("Cantidad de murales: " + sistema.getMuralesDe(d).size());
+            System.out.println("Fichas diferentes usadas: " + sistema.getFichasDistintasDe(d).size());
+            System.out.println("Colores diferentes usados: " + sistema.cantidadColoresDistintos(d));
+            System.out.println();
         }
     }
     

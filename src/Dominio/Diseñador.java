@@ -8,7 +8,7 @@ package dominio;
 
 import java.util.ArrayList;
 
-public class Diseñador {
+public class Diseñador implements Comparable<Diseñador> {
     private String nombre;
     private String mail;
     private String direccion;
@@ -52,5 +52,10 @@ public class Diseñador {
     @Override
     public String toString(){
         return "Nombre: "+nombre+"  Mail: "+mail+"  Dirección: "+direccion;
+    }
+
+    @Override
+    public int compareTo(Diseñador otro) {
+        return this.nombre.compareToIgnoreCase(otro.getNombreDiseñador());
     }
 }

@@ -7,6 +7,7 @@
 package dominio;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Sistema {
 
@@ -85,13 +86,52 @@ public class Sistema {
                 
     }
     public ArrayList<Mural> getMuralesDe(Diseñador disenador) {
-    ArrayList<Mural> resultado = new ArrayList<Mural>();
-    for (int i = 0; i < listaMurales.size(); i++) {
-        Mural mural = listaMurales.get(i);
-        if (mural.getDiseñador().getNombreDiseñador().equals(disenador.getNombreDiseñador())) {
-            resultado.add(mural);
+        ArrayList<Mural> resultado = new ArrayList<Mural>();
+        for (int i = 0; i < listaMurales.size(); i++) {
+            Mural mural = listaMurales.get(i);
+            if (mural.getDiseñador().getNombreDiseñador().equals(disenador.getNombreDiseñador())) {
+                resultado.add(mural);
+            }
         }
+        return resultado;
     }
-    return resultado;
-}
+
+    public ArrayList<Diseñador> getDiseñadoresOrdenados() {
+        ArrayList<Diseñador> ordenados = new ArrayList<Diseñador>(listaDiseñadores);
+        Collections.sort(ordenados);
+        return ordenados;
+    }
+
+    public ArrayList<Ficha> getFichasDistintasDe(Diseñador disenador) {
+        ArrayList<Ficha> distintas = new ArrayList<Ficha>();
+        ArrayList<Mural> murales = getMuralesDe(disenador);
+        for (int i = 0; i < murales.size(); i++) {
+            ArrayList<Ficha> fichasMural = murales.get(i).getFichasDistintas();
+            for (int j = 0; j < fichasMural.size(); j++) {
+                Ficha ficha = fichasMural.get(j);
+                boolean yaEsta = false;
+                for (int k = 0; k < distintas.size(); k++) {
+                    if (distintas.get(k).getNombreFicha().equals(ficha.getNombreFicha())) {
+                        yaEsta = true;
+                    }
+                }
+                if (!yaEsta && !ficha.getNombreFicha().equals("VACIA")) {
+                    distintas.add(ficha);
+                }
+            }
+        }
+        return distintas;
+    }
+
+    public int cantidadColoresDistintos(Diseñador disenador) {
+        ArrayList<Ficha> fichas = getFichasDistintasDe(disenador);
+        String colores = "";
+        for (int i = 0; i < fichas.size(); i++) {
+            String color = fichas.get(i).getColor();
+            if (!colores.contains(color)) {
+                colores = colores + color;
+            }
+        }
+        return colores.length();
+    }
 }
