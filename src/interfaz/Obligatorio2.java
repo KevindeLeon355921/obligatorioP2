@@ -14,6 +14,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
+import dominio.Mural;
 
 public class Obligatorio2 {
 
@@ -194,12 +195,112 @@ public class Obligatorio2 {
         }
     }
     
-    private static void crearMural(Sistema sistema){
-        for(int i = 0; i< sistema.getListaDiseñadores().size(); i++){
-            String nombre = sistema.getListaDiseñadores().get(i).getNombreDiseñador();
-            System.out.println((i+1) + ")" + nombre);
+    private static void crearMural(Sistema sistema) {
+        ArrayList<Diseñador> disenadores = sistema.getListaDiseñadores();
+        if (disenadores.size() == 0) {
+            System.out.println("No hay diseñadores registrados. Registre uno primero.");
+            return;
+        }
+        for (int i = 0; i < disenadores.size(); i++) {
+            System.out.println((i + 1) + ") " + disenadores.get(i).getNombreDiseñador());
+        }
+        int numDisenador = leerEntero("Elejir diseñador: ", 1, disenadores.size());
+        Diseñador disenador = disenadores.get(numDisenador - 1);
+
+        System.out.println("Ingrese el nombre del mural:");
+        String nombreMural = teclado.nextLine();
+        while (nombreMural.equals("") || sistema.existeMural(nombreMural)) {
+            System.out.println("Nombre vacío o ya existente, ingrese otro:");
+            nombreMural = teclado.nextLine();
+        }
+            System.out.println("Ingrese el formato (D, R, F, B o M):");
+        String formato = teclado.nextLine().toUpperCase();
+        while (formato.length() != 1 || !"DRFBM".contains(formato)) {
+            System.out.println("Formato inválido. Ingrese D, R, F, B o M:");
+            formato = teclado.nextLine().toUpperCase();
+        }
+
+        Ficha ficha1 = elegirFicha(sistema, "Elija la primera ficha: ");
+        Ficha ficha2 = elegirFicha(sistema, "Elija la segunda ficha: ");
+        while (ficha2.getNombreFicha().equals(ficha1.getNombreFicha())) {
+            System.out.println("La segunda ficha debe ser distinta de la primera.");
+            ficha2 = elegirFicha(sistema, "Elija la segunda ficha: ");
+        }
+
+        Mural mural = new Mural();
+        mural.setNombreMural(nombreMural);
+        mural.setFormato(formato);
+        mural.setDiseñador(disenador);
+        mural.setFicha1(ficha1);
+        mural.setFicha2(ficha2);
+        mural.aplicarFormato(sistema.buscarFicha("VACIA"));
+
+        if (formato.equals("M")) {
+            agregarFichasManual(mural);
+        }
+
+        sistema.agregarMural(mural);
+        System.out.println("Mural creado correctamente.");
+        System.out.println("Tamaño grande:");
+        mostrarMural(mural, true);
+        System.out.println("Tamaño chico:");
+        mostrarMural(mural, false);
+    }
+    
+    private static void mostrarMural(Mural mural, boolean grande) {
+        int renglonesPorFicha = 3;
+        if (grande) {
+            renglonesPorFicha = 5;
+        }
+        for (int fila = 0; fila < 10; fila++) {
+            for (int renglon = 0; renglon < renglonesPorFicha; renglon++) {
+                String linea = "";
+                for (int col = 0; col < 12; col++) {
+                    Ficha ficha = mural.getFichaEn(fila, col);
+                    String pedazo;
+                    if (grande) {
+                        pedazo = ficha.getFilaGrande(renglon);
+                    } else {
+                        pedazo = ficha.getFilaChica(renglon);
+                    }
+                    linea = linea + codigoColor(ficha.getColor()) + pedazo + colorNormal();
+                }
+                System.out.println(linea);
+            }
         }
     }
+    
+    private static Ficha elegirFicha(Sistema sistema, String mensaje) {
+        ArrayList<Ficha> fichas = sistema.getListaFichas();
+        for (int i = 0; i < fichas.size(); i++) {
+            System.out.println((i + 1) + ") " + fichas.get(i).getNombreFicha());
+        }
+        int num = leerEntero(mensaje, 1, fichas.size());
+        return fichas.get(num - 1);
+    }
+
+    private static void agregarFichasManual(Mural mural) {
+        System.out.println("¿Desea agregar una ficha? (S/N):");
+        String respuesta = teclado.nextLine().toUpperCase();
+        while (respuesta.equals("S")) {
+            int fila = leerEntero("Fila (1-10): ", 1, 10);
+            int columna = leerEntero("Columna (1-12): ", 1, 12);
+            int cual = leerEntero("¿Cuál ficha? (1 o 2): ", 1, 2);
+            if (cual == 1) {
+                mural.setFichaEn(fila - 1, columna - 1, mural.getFicha1());
+            } else {
+                mural.setFichaEn(fila - 1, columna - 1, mural.getFicha2());
+            }
+            System.out.println("¿Desea agregar otra ficha? (S/N):");
+            respuesta = teclado.nextLine().toUpperCase();
+        }
+    }
+
+    
+    
+    
+    
+    
 
 
     private static void registrarFicha(Sistema sistema) {
