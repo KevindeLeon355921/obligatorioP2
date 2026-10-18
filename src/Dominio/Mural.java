@@ -6,6 +6,8 @@
  */
 package dominio;
 
+import java.util.ArrayList;
+
 public class Mural {
 
     private String nombreMural;
@@ -14,6 +16,7 @@ public class Mural {
     private Ficha ficha1;
     private Ficha ficha2;
     private Ficha[][] mural = new Ficha[10][12];
+    private Ficha[][] original = new Ficha[10][12];
 
     public Mural() {
         this.setNombreMural("sin nombre");
@@ -123,5 +126,50 @@ public class Mural {
                 }
                 break;
         }
+    }
+
+    public void guardarOriginal() {
+        for (int i = 0; i < this.mural.length; i++) {
+            for (int j = 0; j < this.mural[0].length; j++) {
+                this.original[i][j] = this.mural[i][j];
+            }
+        }
+    }
+
+    public void restaurar() {
+        for (int i = 0; i < this.mural.length; i++) {
+            for (int j = 0; j < this.mural[0].length; j++) {
+                this.mural[i][j] = this.original[i][j];
+            }
+        }
+    }
+
+    public void reemplazarFicha(Ficha vieja, Ficha nueva) {
+        for (int i = 0; i < this.mural.length; i++) {
+            for (int j = 0; j < this.mural[0].length; j++) {
+                if (this.mural[i][j].getNombreFicha().equals(vieja.getNombreFicha())) {
+                    this.mural[i][j] = nueva;
+                }
+            }
+        }
+    }
+
+    public ArrayList<Ficha> getFichasDistintas() {
+        ArrayList<Ficha> distintas = new ArrayList<Ficha>();
+        for (int i = 0; i < this.mural.length; i++) {
+            for (int j = 0; j < this.mural[0].length; j++) {
+                Ficha ficha = this.mural[i][j];
+                boolean yaEsta = false;
+                for (int k = 0; k < distintas.size(); k++) {
+                    if (distintas.get(k).getNombreFicha().equals(ficha.getNombreFicha())) {
+                        yaEsta = true;
+                    }
+                }
+                if (!yaEsta) {
+                    distintas.add(ficha);
+                }
+            }
+        }
+        return distintas;
     }
 }

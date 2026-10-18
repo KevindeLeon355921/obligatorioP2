@@ -47,6 +47,9 @@ public class Obligatorio2 {
                 case 4:
                     crearMural(sistema);
                     break;
+                case 5:
+                    modificarMural(sistema);
+                    break;
                 case 6:
                     visualizarMural(sistema);
                     break;
@@ -236,12 +239,10 @@ public class Obligatorio2 {
             agregarFichasManual(mural);
         }
 
+        mural.guardarOriginal();
         sistema.agregarMural(mural);
         System.out.println("Mural creado correctamente.");
-        System.out.println("Tamaño grande:");
-        mostrarMural(mural, true);
-        System.out.println("Tamaño chico:");
-        mostrarMural(mural, false);
+        mostrarMuralAmbosTamanos(mural);
     }
     
     private static void mostrarMural(Mural mural, boolean grande) {
@@ -345,6 +346,61 @@ public class Obligatorio2 {
             System.out.println("Presione ENTER para cambiar de tamaño o S para salir:");
             respuesta = teclado.nextLine().toUpperCase();
             grande = !grande;
+        }
+    }
+
+    private static void mostrarMuralAmbosTamanos(Mural mural) {
+        System.out.println("Tamaño grande:");
+        mostrarMural(mural, true);
+        System.out.println("Tamaño chico:");
+        mostrarMural(mural, false);
+    }
+
+    private static void modificarMural(Sistema sistema) {
+        ArrayList<Mural> murales = sistema.getListaMurales();
+        if (murales.size() == 0) {
+            System.out.println("No hay murales registrados.");
+            return;
+        }
+        for (int i = 0; i < murales.size(); i++) {
+            Mural m = murales.get(i);
+            System.out.println((i + 1) + ") " + m.getNombreMural() + " - " + m.getDiseñador().getNombreDiseñador());
+        }
+        int num = leerEntero("Elija un mural: ", 1, murales.size());
+        Mural mural = murales.get(num - 1);
+
+        int opcion = -1;
+        while (opcion != 0) {
+            System.out.println();
+            System.out.println("0) Volver al menú anterior");
+            System.out.println("1) Modificar posición");
+            System.out.println("2) Modificar ficha");
+            System.out.println("3) Restaurar");
+            opcion = leerEntero("Ingrese una opción: ", 0, 3);
+            switch (opcion) {
+                case 1:
+                    int fila = leerEntero("Fila (1-10): ", 1, 10);
+                    int columna = leerEntero("Columna (1-12): ", 1, 12);
+                    Ficha nueva = elegirFicha(sistema, "Elija la nueva ficha: ");
+                    mural.setFichaEn(fila - 1, columna - 1, nueva);
+                    mostrarMuralAmbosTamanos(mural);
+                    break;
+                case 2:
+                    ArrayList<Ficha> actuales = mural.getFichasDistintas();
+                    for (int i = 0; i < actuales.size(); i++) {
+                        System.out.println((i + 1) + ") " + actuales.get(i).getNombreFicha());
+                    }
+                    int numVieja = leerEntero("Elija la ficha a reemplazar: ", 1, actuales.size());
+                    Ficha vieja = actuales.get(numVieja - 1);
+                    Ficha reemplazo = elegirFicha(sistema, "Elija la ficha nueva: ");
+                    mural.reemplazarFicha(vieja, reemplazo);
+                    mostrarMuralAmbosTamanos(mural);
+                    break;
+                case 3:
+                    mural.restaurar();
+                    mostrarMuralAmbosTamanos(mural);
+                    break;
+            }
         }
     }
 
