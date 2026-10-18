@@ -84,4 +84,14 @@ public class Sistema {
         return encontrada;  
                 
     }
+    public ArrayList<Mural> getMuralesDe(Diseñador disenador) {
+    ArrayList<Mural> resultado = new ArrayList<Mural>();
+    for (int i = 0; i < listaMurales.size(); i++) {
+        Mural mural = listaMurales.get(i);
+        if (mural.getDiseñador().getNombreDiseñador().equals(disenador.getNombreDiseñador())) {
+            resultado.add(mural);
+        }
+    }
+    return resultado;
+}
 }

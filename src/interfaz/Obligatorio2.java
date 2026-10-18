@@ -47,6 +47,9 @@ public class Obligatorio2 {
                 case 4:
                     crearMural(sistema);
                     break;
+                case 6:
+                    visualizarMural(sistema);
+                    break;
                 case 7:
                     mostrarListaDisenadores(sistema);
                     break;
@@ -196,16 +199,10 @@ public class Obligatorio2 {
     }
     
     private static void crearMural(Sistema sistema) {
-        ArrayList<Diseñador> disenadores = sistema.getListaDiseñadores();
-        if (disenadores.size() == 0) {
-            System.out.println("No hay diseñadores registrados. Registre uno primero.");
+        Diseñador disenador = elegirDisenador(sistema);
+        if (disenador == null) {
             return;
         }
-        for (int i = 0; i < disenadores.size(); i++) {
-            System.out.println((i + 1) + ") " + disenadores.get(i).getNombreDiseñador());
-        }
-        int numDisenador = leerEntero("Elejir diseñador: ", 1, disenadores.size());
-        Diseñador disenador = disenadores.get(numDisenador - 1);
 
         System.out.println("Ingrese el nombre del mural:");
         String nombreMural = teclado.nextLine();
@@ -302,6 +299,54 @@ public class Obligatorio2 {
     
     
 
+
+    private static Diseñador elegirDisenador(Sistema sistema) {
+        ArrayList<Diseñador> disenadores = sistema.getListaDiseñadores();
+        Diseñador elegido = null;
+        if (disenadores.size() == 0) {
+            System.out.println("No hay diseñadores registrados. Registre uno primero.");
+        } else {
+            for (int i = 0; i < disenadores.size(); i++) {
+                System.out.println((i + 1) + ") " + disenadores.get(i).getNombreDiseñador());
+            }
+            int num = leerEntero("Elija un diseñador: ", 1, disenadores.size());
+            elegido = disenadores.get(num - 1);
+        }
+        return elegido;
+    }
+
+    private static void visualizarMural(Sistema sistema) {
+        Diseñador disenador = elegirDisenador(sistema);
+        if (disenador == null) {
+            return;
+        }
+        ArrayList<Mural> murales = sistema.getMuralesDe(disenador);
+        if (murales.size() == 0) {
+            System.out.println("Ese diseñador no tiene murales.");
+            return;
+        }
+        for (int i = 0; i < murales.size(); i++) {
+            System.out.println((i + 1) + ") " + murales.get(i).getNombreMural());
+        }
+        int num = leerEntero("Elija un mural: ", 1, murales.size());
+        Mural mural = murales.get(num - 1);
+
+        System.out.println("¿En qué tamaño? (G = grande, C = chico):");
+        String tamano = teclado.nextLine().toUpperCase();
+        while (!tamano.equals("G") && !tamano.equals("C")) {
+            System.out.println("Ingrese G o C:");
+            tamano = teclado.nextLine().toUpperCase();
+        }
+        boolean grande = tamano.equals("G");
+
+        String respuesta = "";
+        while (!respuesta.equals("S")) {
+            mostrarMural(mural, grande);
+            System.out.println("Presione ENTER para cambiar de tamaño o S para salir:");
+            respuesta = teclado.nextLine().toUpperCase();
+            grande = !grande;
+        }
+    }
 
     private static void registrarFicha(Sistema sistema) {
         Ficha ficha = new Ficha();
